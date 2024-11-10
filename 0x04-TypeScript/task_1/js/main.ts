@@ -22,7 +22,7 @@ const printTeacher:printTeacherFunction = (firstName, lastName) => {
 
 console.log(printTeacher("Nqobile", "Mvundlela"));
 
-interface StudentConstructorInterface {
+export interface StudentConstructor {
     new (firstName: string, lastName: string): StudentClassInterface;
   }
   
