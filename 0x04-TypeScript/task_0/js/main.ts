@@ -24,13 +24,23 @@ const studentsList:Student[] = [
 ]
 
 // Render a table using Vanilla JavaScript
+const body = document.querySelector('body') as HTMLBodyElement;
 const table = document.createElement('table');
+const tableBody = document.createElement('tbody');
+
 studentsList.forEach((student) => {
-  const row = table.insertRow();
-  const cell1 = row.insertCell(0);
-  const cell2 = row.insertCell(1);
+  const row = document.createElement('tr');
+
+  const cell1 = document.createElement('td');
   cell1.textContent = student.firstName;
+  row.appendChild(cell1);
+
+  const cell2 = document.createElement('td');
   cell2.textContent = student.location;
+  row.appendChild(cell2);
+
+  tableBody.appendChild(row);
 });
 
-document.body.appendChild(table);
+table.appendChild(tableBody);
+body.appendChild(table);
