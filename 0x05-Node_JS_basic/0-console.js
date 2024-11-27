@@ -1,5 +1,10 @@
-function displayMessage(string) {
-    console.log(string);
+/**
+ * 
+ * @param {message} string 
+ */
+
+function displayMessage(message) {
+    console.log(message);
 }
 
 module.exports = displayMessage;
