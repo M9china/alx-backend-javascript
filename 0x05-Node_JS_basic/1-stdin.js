@@ -1,17 +1,17 @@
-process.stdout.write('Welcome to Holberton School, what is your name?\n');
+process.stdout.write("Welcome to ALX, what is your name?\n");
 
-const isPipedInput = !process.stdin.isTTY;
+const isInputPipped = process.stdin.isTTY;
 
-process.stdin.on('data', (data) => {
-    const input = data.toString().trim();
-    process.stdout.write(`Your name is: ${input}\n`);
-    if (!isPipedInput) {
-        process.exit();
-    }
+process.stdin.on("data", (data) => {
+  const name = data.toString().trim();
+  console.log(`Your name is: ${name}`);
+  if (isInputPipped) {
+    process.exit();
+  }
 });
 
 process.on("exit", () => {
-    if (isPipedInput) {
-        console.log("This important software is now closing");
-    }
+  if (!isInputPipped) {
+    console.log("This important software is now closing");
+  }
 });
