@@ -29,6 +29,6 @@ describe("calculateNumber", () => {
 
   it("should handle large numbers", () => {
     assert.strictEqual(calculateNumber(123456.7, 0.4), 123457);
-    assert.strictEqual(calculateNumber(123456.5, 0.5), 123457);
+    assert.strictEqual(calculateNumber(123456.5, 0.5), 123458);
   });
 });
