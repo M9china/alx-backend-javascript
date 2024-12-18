@@ -22,4 +22,9 @@ describe("Index Page Tests", () => {
     const response = await supertest(app).get("/cart/twelve");
     expect(response.statusCode).to.equal(404);
   });
+
+  it("should return 404 for mising cart id", async () => {
+    const response = await supertest(app).get("/cart/");
+    expect(response.statusCode).to.equal(404);
+  });
 });
