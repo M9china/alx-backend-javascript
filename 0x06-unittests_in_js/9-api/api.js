@@ -4,12 +4,12 @@ const app = express();
 const port = 7865;
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the payment system");
+  res.status(200).send("Welcome to the payment system");
 });
 
 app.get("/cart/:id(\\d+)", (req, res) => {
   const cartId = req.params.id;
-  res.send(`Payment methods for cart ${cartId}`);
+  res.status(200).send(`Payment methods for cart ${cartId}`);
 });
 
 app.use((req, res) => {
