@@ -13,7 +13,9 @@ app.get("/cart/:id(\\d+)", (req, res) => {
 });
 
 app.use((req, res) => {
-  res.status(404).send("Not found");
+  res.setHeader("Content-Security-Policy", "default-src 'none'");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.status(404).send("Cannot GET " + req.originalUrl);
 });
 
 app.listen(port, () => {
