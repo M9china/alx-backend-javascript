@@ -1,10 +1,10 @@
-const fs = require('fs');
+const fs = require("fs");
 
 function readFile(filepath) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filepath, 'utf-8', (error, data) => {
+    fs.readFile(filepath, "utf-8", (error, data) => {
       if (error) {
-        reject(new Error('Cannot load the database'));
+        reject(new Error("Cannot load the database"));
       } else {
         resolve(data);
       }
@@ -13,12 +13,12 @@ function readFile(filepath) {
 }
 
 function manData(data) {
-  const rows = data.split('\n').map((line) => line.trim());
-  const header = rows[0].split(',');
+  const rows = data.split("\n").map((line) => line.trim());
+  const header = rows[0].split(",");
   const pp = [];
   for (let i = 1; i < rows.length - 1; i += 1) {
     const people = {};
-    const val = rows[i].split(',');
+    const val = rows[i].split(",");
     for (let j = 0; j < header.length; j += 1) {
       people[header[j]] = val[j];
     }
