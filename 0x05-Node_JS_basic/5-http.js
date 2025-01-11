@@ -94,7 +94,7 @@ const SERVER_ROUTE_HANDLERS = [
         })
         .catch((err) => {
           responseParts.push(
-            err instanceof Error ? err.message : err.toString()
+            err instanceof Error ? err.message : err.toString(),
           );
           const responseText = responseParts.join('\n');
           res.setHeader('Content-Type', 'text/plain');
