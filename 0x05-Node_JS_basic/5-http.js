@@ -1,16 +1,16 @@
-const http = require("http");
+const http = require('http');
 
 const port = 1245;
-const hostname = "127.0.0.1";
+const hostname = '127.0.0.1';
 const app = http.createServer();
-const fs = require("fs");
+const fs = require('fs');
 
-const filename = process.argv.length > 2 ? process.argv[2] : "";
+const filename = process.argv.length > 2 ? process.argv[2] : '';
 function readFile(filepath) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filepath, "utf-8", (error, data) => {
+    fs.readFile(filepath, 'utf-8', (error, data) => {
       if (error) {
-        reject(new Error("Cannot load the database"));
+        reject(new Error('Cannot load the database'));
       } else {
         resolve(data);
       }
@@ -19,13 +19,13 @@ function readFile(filepath) {
 }
 
 function manData(data) {
-  const rows = data.split("\n").map((line) => line.trim());
-  const header = rows[0].split(",");
+  const rows = data.split('\n').map((line) => line.trim());
+  const header = rows[0].split(',');
   const pp = [];
-  let content = "";
+  let content = '';
   for (let i = 1; i < rows.length - 1; i += 1) {
     const people = {};
-    const val = rows[i].split(",");
+    const val = rows[i].split(',');
     for (let j = 0; j < header.length; j += 1) {
       people[header[j]] = val[j];
     }
@@ -35,7 +35,7 @@ function manData(data) {
   for (let i = 0; i < header.length; i += 1) {
     fields.add(pp[i].field);
   }
-  content += "This is the list of our students\n";
+  content += 'This is the list of our students\n';
   content += `Number of students: ${pp.length}\n`;
   let lng = 0;
   const fieldss = Array.from(fields);
@@ -49,7 +49,7 @@ function manData(data) {
     }
     content += `Number of students in ${fieldss[i]}: ${lng}. List:${lists}`;
     if (i < fieldss.length - 1) {
-      content += "\n";
+      content += '\n';
     }
     lists = [];
     lng = 0;
@@ -68,27 +68,27 @@ async function countStudents(filepath) {
 
 const SERVER_ROUTE_HANDLERS = [
   {
-    route: "/",
+    route: '/',
     handler(_, res) {
-      const responseText = "Hello Holberton School!";
+      const responseText = 'Hello Holberton School!';
 
-      res.setHeader("Content-Type", "text/plain");
-      res.setHeader("Content-Length", responseText.length);
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Length', responseText.length);
       res.statusCode = 200;
       res.write(Buffer.from(responseText));
     },
   },
   {
-    route: "/students",
+    route: '/students',
     handler(_, res) {
-      const responseParts = ["This is the list of our students"];
+      const responseParts = ['This is the list of our students'];
 
       countStudents(filename)
         .then((report) => {
           responseParts.push(report);
-          const responseText = responseParts.join("\n");
-          res.setHeader("Content-Type", "text/plain");
-          res.setHeader("Content-Length", responseText.length);
+          const responseText = responseParts.join('\n');
+          res.setHeader('Content-Type', 'text/plain');
+          res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
           res.write(Buffer.from(responseText));
         })
@@ -96,9 +96,9 @@ const SERVER_ROUTE_HANDLERS = [
           responseParts.push(
             err instanceof Error ? err.message : err.toString()
           );
-          const responseText = responseParts.join("\n");
-          res.setHeader("Content-Type", "text/plain");
-          res.setHeader("Content-Length", responseText.length);
+          const responseText = responseParts.join('\n');
+          res.setHeader('Content-Type', 'text/plain');
+          res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
           res.write(Buffer.from(responseText));
         });
@@ -106,7 +106,7 @@ const SERVER_ROUTE_HANDLERS = [
   },
 ];
 
-app.on("request", (req, res) => {
+app.on('request', (req, res) => {
   for (const routeHandler of SERVER_ROUTE_HANDLERS) {
     if (routeHandler.route === req.url) {
       routeHandler.handler(req, res);
@@ -116,7 +116,7 @@ app.on("request", (req, res) => {
 });
 
 app.listen(port, hostname, () => {
-  console.log("...");
+  console.log('...');
 });
 
 module.exports = app;
