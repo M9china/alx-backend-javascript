@@ -69,6 +69,13 @@ app.get('/', (_, res) => {
 });
 
 app.get('/students', (_, res) => {
+
+  if (!databaseFile) {
+    res.setHeader('Content-Type', 'text/plain');
+    res.status(200).send('This is the list of our students\nCannot load the database');
+    return;
+  }
+  
   const responseParts = ['This is the list of our students'];
 
   countStudents(filename)
@@ -77,7 +84,7 @@ app.get('/students', (_, res) => {
       const responseText = responseParts.join('\n');
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', responseText.length);
-      res.status(200).send(Buffer.from(responseText));
+      res.statusCode = 200;
       res.write(Buffer.from(responseText));
     })
     .catch((err) => {
@@ -85,7 +92,7 @@ app.get('/students', (_, res) => {
       const responseText = responseParts.join('\n');
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', responseText.length);
-      res.status(200).send(Buffer.from(responseText));
+      res.statusCode = 200;
       res.write(Buffer.from(responseText));
     });
 });
