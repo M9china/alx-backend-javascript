@@ -68,7 +68,7 @@ app.get('/', (_, res) => {
   res.send('Hello Holberton School!');
 });
 
-app.get("/students", (_, res) => {
+app.get('/students', (_, res) => {
   const responseParts = ['This is the list of our students'];
 
   countStudents(filename)
