@@ -76,16 +76,17 @@ const SERVER_ROUTE_HANDLERS = [
       res.setHeader('Content-Length', responseText.length);
       res.statusCode = 200;
       res.write(Buffer.from(responseText));
-      res.end();
     },
   },
   {
     route: '/students',
     handler(_, res) {
+      const responseParts = ['This is the list of our students'];
 
       countStudents(filename)
         .then((report) => {
-          const responseText = report;
+          responseParts.push(report);
+          const responseText = responseParts.join('\n');
           res.setHeader('Content-Type', 'text/plain');
           res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
