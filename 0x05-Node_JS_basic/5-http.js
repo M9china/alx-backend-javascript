@@ -70,7 +70,7 @@ const SERVER_ROUTE_HANDLERS = [
   {
     route: '/',
     handler(_, res) {
-      const responseText = 'Hello Holberton School!';
+      const responseText = 'Hello ALX!';
 
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', responseText.length);
@@ -81,12 +81,10 @@ const SERVER_ROUTE_HANDLERS = [
   {
     route: '/students',
     handler(_, res) {
-      const responseParts = ['This is the list of our students'];
 
       countStudents(filename)
         .then((report) => {
-          responseParts.push(report);
-          const responseText = responseParts.join('\n');
+          const responseText = report;
           res.setHeader('Content-Type', 'text/plain');
           res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
