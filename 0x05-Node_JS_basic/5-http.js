@@ -35,7 +35,6 @@ function manData(data) {
   for (let i = 0; i < header.length; i += 1) {
     fields.add(pp[i].field);
   }
-  content += 'This is the list of our students\n';
   content += `Number of students: ${pp.length}\n`;
   let lng = 0;
   const fieldss = Array.from(fields);
