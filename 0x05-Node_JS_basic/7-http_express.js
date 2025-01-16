@@ -77,7 +77,7 @@ app.get('/students', (_, res) => {
       const responseText = responseParts.join('\n');
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', responseText.length);
-      res.statusCode = 200;
+      res.status(200).send(Buffer.from(responseText));
       res.write(Buffer.from(responseText));
     })
     .catch((err) => {
@@ -85,7 +85,7 @@ app.get('/students', (_, res) => {
       const responseText = responseParts.join('\n');
       res.setHeader('Content-Type', 'text/plain');
       res.setHeader('Content-Length', responseText.length);
-      res.statusCode = 200;
+      res.status(200).send(Buffer.from(responseText));
       res.write(Buffer.from(responseText));
     });
 });
