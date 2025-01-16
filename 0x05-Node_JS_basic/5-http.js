@@ -76,6 +76,7 @@ const SERVER_ROUTE_HANDLERS = [
       res.setHeader('Content-Length', responseText.length);
       res.statusCode = 200;
       res.write(Buffer.from(responseText));
+      res.end();
     },
   },
   {
